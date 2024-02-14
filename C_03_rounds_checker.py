@@ -6,13 +6,15 @@ def num_rounds():
         if num_round == "":
             return "infinite"
         # Returns the number of rounds the user chose
-        num_round > 0:
-            return num_round
-        # Anything else gets sent back to the start of the loop
-        else:
-            print("Please either press <enter> for infinite mode "
-                  "or type the number (greater than 0) of rounds you want to play")
-            print()
+        try:
+            num_round = int(num_round)
+            # Returns the number of rounds the user chose if it's greater than 0
+            if num_round > 0:
+                return num_round
+            else:
+                print("Please enter a number greater than 0 or press <enter> for infinite mode")
+        except ValueError:
+            print("Please enter a valid number or press <enter> for infinite mode")
 
 
 for item in range(0, 5):
