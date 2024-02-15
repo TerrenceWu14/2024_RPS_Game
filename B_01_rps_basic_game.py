@@ -18,8 +18,7 @@ def num_rounds():
             print("Please enter a valid number or press <enter> for infinite mode")
 
 
-# Check that users have entered a valid
-# option based on a list
+# Check that users have entered a valid option based on a list
 def string_checker(question, valid_ans=('yes', 'no')):
     error = f"Please enter a valid answer from the following list: {valid_ans}"
 
@@ -47,26 +46,35 @@ def string_checker(question, valid_ans=('yes', 'no')):
 rps_list = ["rock", "paper", "scissors", "xxx"]
 
 # Asks the user if they want to see the instructions
-# want_instructions = string_checker("Do you want to see the instructions? ")
-# print(f"You chose {want_instructions}")
+want_instructions = string_checker("Do you want to see the instructions? ")
+print(f"You chose {want_instructions}")
 
+# Gets the total rounds that the user wants to play
 total_rounds = num_rounds()
+# Initialises Round Number
 round_number = 0
 
 if total_rounds == "infinite":
+    # Loops infinitely
     while True:
+        # Updates the round number at the start of each round
         round_number = round_number + 1
-        print(f"Round {round_number}")
+        print(f"--- Round {round_number} | Infinite Mode ---")
+
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
         print(user_choice)
+        print()
+        # If user types xxx it ends the program
         if user_choice == "xxx":
             exit()
 
 else:
+    # Loops until the selected it reaches amount of rounds
     for item in range(1, total_rounds + 1):
-        print(f"Round {item} out of {total_rounds}")
+        print(f"--- Round {item} out of {total_rounds} ---")
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
         print(user_choice)
-
+        print()
+        # If user types xxx it ends the program
         if user_choice == "xxx":
             exit()
