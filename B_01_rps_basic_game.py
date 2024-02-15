@@ -41,13 +41,30 @@ def string_checker(question, valid_ans=('yes', 'no')):
         print()
 
 
+# Displays instructions
+def instructions():
+    print('''
+*** Instructions ***
+
+To begin you must first set a number of rounds to play with the computer (or play infinite mode)
+
+Then play against the computer. You can either choose R (Rock), P (Paper) or S (Scissors). 
+
+These are the rules to determine the winner of a round:
+- Paper beats rock
+- Rock beats scissors
+- Scissors beats paper
+    ''')
+
+
 # Main routine
 
 rps_list = ["rock", "paper", "scissors", "xxx"]
 
 # Asks the user if they want to see the instructions
 want_instructions = string_checker("Do you want to see the instructions? ")
-print(f"You chose {want_instructions}")
+if want_instructions == "yes":
+    instructions()
 
 # Gets the total rounds that the user wants to play
 total_rounds = num_rounds()
@@ -61,7 +78,7 @@ if total_rounds == "infinite":
         round_number = round_number + 1
         print(f"--- Round {round_number} | Infinite Mode ---")
 
-        user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
+        user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
         print(user_choice)
         print()
         # If user types xxx it ends the program
@@ -72,7 +89,7 @@ else:
     # Loops until the selected it reaches amount of rounds
     for item in range(1, total_rounds + 1):
         print(f"--- Round {item} out of {total_rounds} ---")
-        user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
+        user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
         print(user_choice)
         print()
         # If user types xxx it ends the program
