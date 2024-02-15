@@ -1,3 +1,6 @@
+import random
+
+
 # Asks the user how many rounds they want to play or infinite mode
 def num_rounds():
     while True:
@@ -85,6 +88,10 @@ if total_rounds == "infinite":
         if user_choice == "xxx":
             exit()
 
+        # Computer's Choice
+        comp_choice = random.choice(rps_list[:-1])
+        print(comp_choice, end="\t")
+
 else:
     # Loops until the selected it reaches amount of rounds
     for item in range(1, total_rounds + 1):
@@ -95,3 +102,7 @@ else:
         # If user types xxx it ends the program
         if user_choice == "xxx":
             exit()
+
+        # Computer's Choice
+        comp_choice = random.choice(rps_list[:-1])
+        print(comp_choice, end="\t")
