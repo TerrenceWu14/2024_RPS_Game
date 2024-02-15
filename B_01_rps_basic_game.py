@@ -51,15 +51,16 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 # print(f"You chose {want_instructions}")
 
 total_rounds = num_rounds()
+round_number = 0
 
 if total_rounds == "infinite":
     while True:
-        for item in range(1, 99999999):
-            print(f"Round {item}")
-            user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
-            print(user_choice)
-            if user_choice == "xxx":
-                exit()
+        round_number = round_number + 1
+        print(f"Round {round_number}")
+        user_choice = string_checker("Rock, Paper or Scissors (xxx to exit)? ", rps_list)
+        print(user_choice)
+        if user_choice == "xxx":
+            exit()
 
 else:
     for item in range(1, total_rounds + 1):
@@ -68,5 +69,4 @@ else:
         print(user_choice)
 
         if user_choice == "xxx":
-            break
-
+            exit()
