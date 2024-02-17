@@ -49,23 +49,23 @@ def string_checker(question, valid_ans=('yes', 'no')):
 def rps_compare(user, computer):
     # if the user and the computer choice were the same it's a tie
     if user == computer:
-        result = "tie"
+        round_results = "tie"
 
     # The three ways to win
     elif user == "paper" and computer == "rock":
-        result = "win"
+        round_results = "win"
 
     elif user == "rock" and computer == "scissors":
-        result = "win"
+        round_results = "win"
 
     elif user == "scissors" and computer == "paper":
-        result = "win"
+        round_results = "win"
 
     # else it's a loss
     else:
-        result = "lose"
+        round_results = "lose"
 
-    return result
+    return round_results
 
 
 # Displays instructions
@@ -87,6 +87,7 @@ These are the rules to determine the winner of a round:
 # Main routine
 
 rps_list = ["rock", "paper", "scissors", "xxx"]
+game_history = []
 
 # Asks the user if they want to see the instructions
 want_instructions = string_checker("Do you want to see the instructions? ")
@@ -95,8 +96,11 @@ if want_instructions == "yes":
 
 # Gets the total rounds that the user wants to play
 total_rounds = num_rounds()
-# Initialises Round Number
+
+# Initialises game variables
 round_number = 0
+round_tied = 0
+round_lost = 0
 
 if total_rounds == "infinite":
     # Loops infinitely
@@ -116,17 +120,36 @@ if total_rounds == "infinite":
         # Computer's Choice
         print()
         comp_choice = random.choice(rps_list[:-1])
-        print(f"Computer chose: {user_choice}")
+        print(f"Computer chose: {comp_choice}")
         print()
 
         # Decides and outputs the winner
-        winner = rps_compare(user_choice, comp_choice)
-        if winner == "win":
-            winner = "User"
-        else:
-            winner = "The Computer"
+        result = rps_compare(user_choice, comp_choice)
 
-        print(f"{winner} has won this round!")
+        # Adjusts the rounds lost/win/tie and updates game history
+        if result == "tie":
+            round_tied += 1
+            feedback = "😐Its a tie😐"
+
+        elif result == "lose":
+            round_lost += 1
+            feedback = "😢You have lost😢"
+        elif result == "win":
+            feedback = "😀You have won😀"
+
+        # stores the result of the round into this variable
+        round_feedback = f"{user_choice} vs {comp_choice}, {feedback} has won this round!"
+
+        # Adds to the game history list for the result of the round
+        history_item = f"Round: {round_number} - {round_feedback}"
+
+        # outputs the round's result
+        print(round_feedback)
+
+        # Adds the round's result into the list
+        game_history.append(history_item)
+
+        print(game_history)
 
 else:
     # Loops until the selected it reaches amount of rounds
@@ -145,11 +168,11 @@ else:
         print(f"Computer chose: {user_choice}")
 
         # Decides and outputs the winner
-        winner = rps_compare(user_choice, comp_choice)
+        result = rps_compare(user_choice, comp_choice)
 
-        if winner == "win":
-            winner = "User"
+        if result == "win":
+            result = "User"
         else:
-            winner = "The Computer"
+            result = "The Computer"
 
-        print(f"{winner} has won this round!")
+        print(f"{result} has won this round!")
