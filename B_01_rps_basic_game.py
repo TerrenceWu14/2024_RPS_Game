@@ -44,6 +44,30 @@ def string_checker(question, valid_ans=('yes', 'no')):
         print()
 
 
+# Compares the user's choice and the comp choice to decide round result
+# returning either win, lose or tie
+def rps_compare(user, computer):
+    # if the user and the computer choice were the same it's a tie
+    if user == computer:
+        result = "tie"
+
+    # The three ways to win
+    elif user == "paper" and computer == "rock":
+        result = "win"
+
+    elif user == "rock" and computer == "scissors":
+        result = "win"
+
+    elif user == "scissors" and computer == "paper":
+        result = "win"
+
+    # else it's a loss
+    else:
+        result = "lose"
+
+    return result
+
+
 # Displays instructions
 def instructions():
     print('''
@@ -79,30 +103,53 @@ if total_rounds == "infinite":
     while True:
         # Updates the round number at the start of each round
         round_number = round_number + 1
+        print()
         print(f"--- Round {round_number} | Infinite Mode ---")
 
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
-        print(user_choice)
         print()
+        print(f"You chose: {user_choice}")
         # If user types xxx it ends the program
         if user_choice == "xxx":
             exit()
 
         # Computer's Choice
+        print()
         comp_choice = random.choice(rps_list[:-1])
-        print(comp_choice, end="\t")
+        print(f"Computer chose: {user_choice}")
+        print()
+
+        # Decides and outputs the winner
+        winner = rps_compare(user_choice, comp_choice)
+        if winner == "win":
+            winner = "User"
+        else:
+            winner = "The Computer"
+
+        print(f"{winner} has won this round!")
 
 else:
     # Loops until the selected it reaches amount of rounds
     for item in range(1, total_rounds + 1):
+        print()
         print(f"--- Round {item} out of {total_rounds} ---")
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
-        print(user_choice)
+        print(f"You chose: {user_choice}")
         print()
-        # If user types xxx it ends the program
+
         if user_choice == "xxx":
             exit()
 
         # Computer's Choice
         comp_choice = random.choice(rps_list[:-1])
-        print(comp_choice, end="\t")
+        print(f"Computer chose: {user_choice}")
+
+        # Decides and outputs the winner
+        winner = rps_compare(user_choice, comp_choice)
+
+        if winner == "win":
+            winner = "User"
+        else:
+            winner = "The Computer"
+
+        print(f"{winner} has won this round!")
