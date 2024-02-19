@@ -24,7 +24,13 @@ def play_game(total_rounds):
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
 
         # Exits the game if user types "xxx"
-        if user_choice == "xxx":
+        if round_number == 1:
+            print()
+            print("Game has ended. However, you have not even played one round thus we have not stats or history to "
+                  "show you.")
+            exit()
+
+        elif user_choice == "xxx":
             break
 
         # Prints what user chose
@@ -97,8 +103,6 @@ def play_game(total_rounds):
         # Outputs the game history
         for item in game_history:
             print(item)
-
-            print()
 
 
 # Asks the user how many rounds they want to play
