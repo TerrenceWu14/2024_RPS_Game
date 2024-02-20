@@ -10,21 +10,21 @@ def play_game(total_rounds):
     round_number = 0
     round_tied = 0
     round_lost = 0
+    round_won = 0
 
     while total_rounds == "infinite" or round_number < total_rounds:
-        round_number += 1
         print()
         # Depending on the mode, it chooses what headings to display
         if total_rounds == "infinite":
-            print(f"--- Round {round_number} | Infinite Mode ---")
+            print(f"--- Round {round_number + 1} | Infinite Mode ---")
         else:
-            print(f"--- Round {round_number} out of {total_rounds} Rounds ---")
+            print(f"--- Round {round_number + 1} out of {total_rounds} Rounds ---")
 
         # User's turn to choose
         user_choice = string_checker("Rock, Paper or Scissors (xxx to exit game)? ", rps_list)
 
         # Exits the game if user types "xxx"
-        if round_number == 1 and user_choice == "xxx":
+        if round_number == 0 and user_choice == "xxx":
             print()
             print("Game has ended. However, you have not even played one round thus we have not stats or history to "
                   "show you.")
@@ -57,6 +57,7 @@ def play_game(total_rounds):
             feedback = "😢 You have lost 😢"
 
         elif result == "win":
+            round_won += 1
             feedback = "😀 You have won 😀"
 
         # Gets the round feedback and outputs it for the user
@@ -64,8 +65,10 @@ def play_game(total_rounds):
         print(round_feedback)
 
         # Stores the results into a list
-        history_item = f"Round: {round_number} - {round_feedback}"
+        history_item = f"Round: {round_number + 1} - {round_feedback}"
         game_history.append(history_item)
+
+        round_number += 1
 
     # Asks the user if they want to view the game stats
     print()
@@ -75,23 +78,17 @@ def play_game(total_rounds):
     # If yes, displays the game stats
     if view_stats == "yes":
         # Calculates the win percentage
-        rounds_won = total_rounds - round_tied - round_lost
-        percent_won = rounds_won / total_rounds * 100
+        rounds_won = round_won / (round_number - round_tied) * 100
 
         # Calculates loss percentage
-        rounds_lost = round_lost / total_rounds * 100
+        rounds_lost = round_lost / (round_number - round_tied) * 100
 
         # Calculates tie percentage
-        rounds_tied = round_tied / total_rounds * 100
-
-        # Asks the user if they want to view the game stats
-        print()
-        view_stats = string_checker("Do you want to view the stats? ")
-        print()
+        rounds_tied = round_tied / round_number * 100
 
         print(f"Out of {total_rounds} rounds:")
         print()
-        print(f"- {percent_won:.2f}% of games won")
+        print(f"- {rounds_won:.2f}% of games won")
         print()
         print(f"- {rounds_lost:.2f}% of games lost")
         print()
