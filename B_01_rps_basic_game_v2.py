@@ -77,13 +77,12 @@ def play_game(total_rounds):
 
     # If yes, displays the game stats
     if view_stats == "yes":
-        total_non_tied_rounds = round_number - round_tied
 
         # Calculates the win percentage
-        rounds_won = round_won / total_non_tied_rounds * 100
+        rounds_won = round_won / round_number * 100
 
         # Calculates loss percentage:
-        rounds_lost = round_lost / total_non_tied_rounds * 100
+        rounds_lost = round_lost / round_number * 100
 
         # Calculates tie percentage
         rounds_tied = round_tied / round_number * 100
